@@ -28,6 +28,20 @@ def create_report_for_file(cov, path):
     # get line-by-line coverage
     count_lines = len(list(analysis.file_reporter.source_token_lines()))
     line_coverage = [get_coverage(n, analysis) for n in range(1, count_lines + 1)]
+
+    hit = len(analysis.statements) - len(analysis.missing)
+    if len(analysis.statements) > 0:
+        coverage = hit / len(analysis.statements) * 100
+    else:
+        coverage = 100
+
+    summary = {
+        "missing": len(analysis.missing),
+        "excluded": len(analysis.excluded),
+        "hit": hit,
+        "total": len(analysis.statements),
+        "coverage": coverage,
+    }
     
     # read source code
     with open(path, "r") as f:
@@ -37,6 +51,7 @@ def create_report_for_file(cov, path):
         "name": relative_path,
         "source": source,
         "coverage": line_coverage,
+        "summary": summary,
     }
     return report
 
