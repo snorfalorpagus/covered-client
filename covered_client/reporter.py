@@ -22,7 +22,7 @@ def create_report():
 
 
 def create_report_for_file(cov, path):
-    relative_path = os.path.relpath(path)
+    relative_path = os.path.relpath(path).replace("\\", "/")
     analysis = cov._analyze(path)
     
     # get line-by-line coverage
