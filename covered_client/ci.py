@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+
 def get_service_name():
     return os.environ.get("CI", None)
 

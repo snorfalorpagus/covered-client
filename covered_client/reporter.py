@@ -38,6 +38,7 @@ def git_info():
         "branch": get_git_branch(),
         "commit": get_git_commit(),
     }
+    return git
 
 
 def create_report_for_file(cov, path):
@@ -87,6 +88,7 @@ def upload(api_root, report):
     url = f"{api_root}/upload"
     report_json = json.dumps(report)
 
-    res = requests.post(url, files={"file": ("coverage.json", StringIO(report_json), "application/json")})  # TODO: as file? gz?
+    files = {"file": ("coverage.json", StringIO(report_json), "application/json")}
+    res = requests.post(url, files=files)
     assert res.status_code == 200  # TODO
     print(res.text)
