@@ -43,13 +43,25 @@ def test_version(runner):
 
 
 @mock.patch.dict(os.environ, {"COVERED_SERVER": "http://localhost"})
-def test_upload(runner, example_project):
+def test_upload_server_env(runner, example_project):
     response = MockResponse(
         status_code=200,
         content=f"http://localhost/view/{uuid.uuid4()}"
     )
     with mock.patch("requests.post", return_value=response):
         result = runner.invoke(cli.upload)
+    print(result.output.strip())
+    assert result.exit_code == 0
+    assert "http://localhost" in result.output
+
+
+def test_upload_server_arg(runner, example_project):
+    response = MockResponse(
+        status_code=200,
+        content=f"http://localhost/view/{uuid.uuid4()}"
+    )
+    with mock.patch("requests.post", return_value=response):
+        result = runner.invoke(cli.upload, ["--server", "http://localhost"])
     print(result.output.strip())
     assert result.exit_code == 0
     assert "http://localhost" in result.output
