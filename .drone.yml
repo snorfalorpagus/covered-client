@@ -1,0 +1,11 @@
+pipeline:
+  build:
+    image: python:stretch
+    commands:
+      - cp -R . ~
+      - cd ~
+      - bash clean.sh
+      - pip install pipenv
+      - pipenv install --dev --system
+      - python -m pytest example_project/ --cov example_project
+      - python -m pytest tests -v --cov=covered_client --cov=tests
