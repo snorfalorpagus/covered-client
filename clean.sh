@@ -4,6 +4,7 @@ rm -rf app/__pycache__
 rm -rf ./__pycache__
 rm -rf .cache
 rm -f .coverage
+rm -f example_project/.coverage
 rm -rf *.egg_info
 rm -rf .egg
 rm -rf .eggs
