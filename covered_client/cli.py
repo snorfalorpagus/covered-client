@@ -31,6 +31,8 @@ def upload(ctx, server):
         except KeyError:
             raise KeyError("Specify server with --server or COVERED_SERVER environment variable.")
     report = reporter.create_report()
+    if not report["source_files"]:
+        raise click.ClickException("Coverage data not found!")
     reporter.upload(server, report)
 
 
