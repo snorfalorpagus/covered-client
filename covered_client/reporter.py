@@ -21,6 +21,8 @@ def create_report():
     paths.sort()
 
     report["source_files"] = [create_report_for_file(cov, path) for path in paths]
+    report["summary"] = get_summary(report["source_files"])
+
     return report
 
 
@@ -51,7 +53,7 @@ def create_report_for_file(cov, path):
 
     hit = len(analysis.statements) - len(analysis.missing)
     if len(analysis.statements) > 0:
-        coverage = hit / len(analysis.statements) * 100
+        coverage = hit / len(analysis.statements) * 100  # TODO: excluded?
     else:
         coverage = 100
 
@@ -82,6 +84,30 @@ def get_coverage(n, analysis):
     if n not in analysis.statements:
         return None
     return 1
+
+
+def get_summary(source_files):
+    hit = 0
+    missing = 0
+    excluded = 0
+    total = 0
+    for source_file in source_files:
+        summary = source_file["summary"]
+        hit += summary["hit"]
+        missing += summary["missing"]
+        excluded += summary["excluded"]
+        total += summary["total"]
+    if total:
+        coverage = hit / total * 100  # TODO: excluded?
+    else:
+        coverage = 100
+    return {
+        "hit": hit,
+        "missing": missing,
+        "excluded": excluded,
+        "total": total,
+        "coverage": coverage,
+    }
 
 
 def upload(api_root, report):
