@@ -1,3 +1,5 @@
+import empty
+
 def foo():
     """This is an example"""
     a = 1
