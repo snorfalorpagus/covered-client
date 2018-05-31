@@ -3,6 +3,7 @@ import sys
 import os
 
 import covered_client.reporter as reporter
+from covered_client import __version__
 
 @click.group()
 @click.pass_context
@@ -12,6 +13,11 @@ def cli(ctx):
 
 def main():
     cli()
+
+
+@cli.command()
+def version():
+    print("covered {}".format(__version__))
 
 
 @cli.command()
