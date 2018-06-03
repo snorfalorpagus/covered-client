@@ -19,6 +19,8 @@ pipenv shell
 
 ## Testing
 
+You must generate coverage data for the `example_project` before running tests. See [example_project/README.md](example_project/README.md).
+
 Running tests locally:
 
 ```
