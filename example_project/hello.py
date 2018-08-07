@@ -3,7 +3,7 @@ import empty
 def foo():
     """This is an example"""
     a = 1
-    b = 2
+    b = 2  # pragma: nocover
     c = 3
     return c
 
