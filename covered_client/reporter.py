@@ -4,7 +4,7 @@ import coverage
 import requests
 from io import StringIO
 
-from .ci import get_service_name, get_build_number, get_job_number, get_git_branch, get_git_commit
+from .ci import get_service_name, get_build_number, get_job_number, get_branch, get_commit
 
 
 def create_report():
@@ -37,8 +37,8 @@ def service_info():
 
 def git_info():
     git = {
-        "branch": get_git_branch(),
-        "commit": get_git_commit(),
+        "branch": get_branch(),
+        "commit": get_commit(),
     }
     return git
 
