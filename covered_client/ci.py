@@ -21,7 +21,7 @@ def call(command):
 
 
 def get_branch():
-    branch = os.environ.get("CI_BRANCH", None)
+    branch = os.environ.get("CI_COMMIT_BRANCH", None)
     if branch:
         return branch
     branch = get_git_branch()
@@ -29,7 +29,7 @@ def get_branch():
 
 
 def get_commit():
-    commit = os.environ.get("CI_COMMIT", None)
+    commit = os.environ.get("CI_COMMIT_SHA", None)
     if commit:
         return commit
     commit = get_git_commit()
